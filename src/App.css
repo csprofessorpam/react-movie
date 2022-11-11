@@ -1,3 +1,26 @@
-.App {
-  text-align: center;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* create variables for colors */
+
+:root{
+  --red: #e50916;
+  --white: #fff;
+  --dark-bg: #221f1f;
+  --header-height: 70px;
+  --light-bg: #3c3c3c;
+  --transparent-bg: rgba(20, 20, 20, 0.7);
+
+}
+
+a{
+  text-decoration: none;
+}
+
+body{
+  background-color:var(--dark-bg);
 }

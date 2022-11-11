@@ -1,0 +1,10 @@
+
+.header-container{
+    height:var(--header-height);
+    background-color:var(--transparent-bg);
+    /*background-color: yellow;*/
+    color:var(--white);
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
