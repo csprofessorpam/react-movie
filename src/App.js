@@ -3,6 +3,9 @@ import './App.css';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Homepage from './pages/Homepage/Homepage';
+import {BrowserRouter, Routes, Route } from 'react-router-dom'
+
+import ThemeContextProvider from './contexts/ThemeContext'
 
 function App() {
 
@@ -11,9 +14,14 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <Homepage apiKey={apiKey} baseUrl={baseUrl} />
-      <Footer />
+      <BrowserRouter>
+        <ThemeContextProvider>
+          <Header />
+        </ThemeContextProvider>
+        <Homepage apiKey={apiKey} baseUrl={baseUrl} />
+       
+        
+      </BrowserRouter>
     </div>
   );
 }

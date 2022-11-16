@@ -2,13 +2,15 @@ import React from 'react'
 import axios from 'axios'
 import './Slider.css'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
-
+import StarRatings from 'react-star-ratings';
 
 function Slider({baseUrl, apiKey}) {
     //create state for movie data
     const [upcomingMovies , setUpcomingMovies ] = React.useState([]);
 
     const [index, setIndex] = React.useState(0);
+
+    const [currentRating, setCurrentRating] = React.useState(0);
     const imgBase = "https://image.tmdb.org/t/p/w500";
     //need baseurl for image
 
@@ -31,17 +33,34 @@ function Slider({baseUrl, apiKey}) {
             .then(response => {
                 console.log(response.data.results)
                 setUpcomingMovies(response.data.results)
+                setCurrentRating(Math.round((response.data.results[0].vote_average)/2));
             } )
             .catch(err => console.log(err))
         }, []
     )
 
     const handleRight = () =>{
-        setIndex(index + 1);
+        //setIndex(index + 1);
+        //cycle back when you get to the end
+        // if(index == upcomingMovies.length - 1){
+        //     setIndex(0);
+        // }
+        // else{
+        //     setIndex(index + 1);
+        // }
+        index === upcomingMovies.length - 1? setIndex(0):setIndex(index+1);
+        //update rating
+        setCurrentRating(Math.round((upcomingMovies[index].vote_average)/2));
     }
 
     const handleLeft = () =>{
-        setIndex(index - 1);
+        //setIndex(index - 1);
+        index === 0? setIndex(upcomingMovies.length - 1):setIndex(index-1);
+        //update rating
+        setCurrentRating(Math.round((upcomingMovies[index].vote_average)/2));
+        
+
+        
     }
 
   return (
@@ -49,7 +68,14 @@ function Slider({baseUrl, apiKey}) {
         <div className="slider-overlay"></div>
         <MdKeyboardArrowLeft className="left-arrow" onClick={handleLeft} />
         <MdKeyboardArrowRight className="right-arrow" onClick={handleRight} />
-        <h3>{upcomingMovies[0]?.original_title}</h3>
+        <div className="movie-info">
+            <h1>{upcomingMovies[index]?.title}</h1>
+            <p>{upcomingMovies[index]?.overview.slice(0, 120)}</p>
+            <StarRatings rating={currentRating}
+                         starRatedColor="red"
+                         starDimension="15px"
+                         starSpacong="1px"/>
+        </div>
         {/* <img src={`${imgBase}${upcomingMovies[0]?.backdrop_path}` } /> */}
     </div>
   )

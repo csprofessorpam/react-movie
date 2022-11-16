@@ -22,3 +22,13 @@
 .right-arrow{
     right: 0;
 }
+
+.movie-info{
+    border: 1px solid red;
+    position: absolute;
+    bottom: 0; 
+    /* height: 35vh; */
+    width: 50%;
+    /* z-index: 1; */
+    color: var(--white);
+}
