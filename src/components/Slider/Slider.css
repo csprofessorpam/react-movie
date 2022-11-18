@@ -1,17 +1,17 @@
 .slider-overlay{
-    /* background: rgb(0,0,0); */
+    /* background: rgb(0,0,0);   IS THIS NEEDED? */
     background: linear-gradient(90deg, rgba(0.0.0.1) 0%, rgba(255,255,255,0) 100%);
     position: absolute;
     height: 100%;
     width: 100%;
-    
+    /* height and width based on parent */
 }
 
 .left-arrow, .right-arrow{
     color:var(--red);
     font-size: 40px;
     z-index: 2;
-    position: absolute;
+    position: absolute;  /* based on parent, parent must be relative position */
     top: 45%;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .movie-info{
-    border: 1px solid red;
+    
     position: absolute;
     bottom: 0; 
     /* height: 35vh; */

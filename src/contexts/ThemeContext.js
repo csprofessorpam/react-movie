@@ -10,7 +10,8 @@ export default function ThemeContextProvider(props) {
             const theme = localStorage.getItem("darkMode");
             
             //stores everything as a string, needs to be boolean
-            //use JSON.parse to fix
+            //use JSON.parse to fix if value is not a string
+            //all values in localStorage are stored as strings
             setDarkMode(JSON.parse(theme));
         }, []
     )

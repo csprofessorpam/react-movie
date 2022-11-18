@@ -5,3 +5,28 @@
     color:var(--white);
 }
 
+.movie-cards{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.top-rated-container{
+    border: 1px solid red;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.movie-container{
+    display: flex;
+}
+
+.popular-container{
+    width: 80%;
+}
+
+.top-rated-container{
+    width: 20%;
+}

@@ -5,14 +5,17 @@ import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import StarRatings from 'react-star-ratings';
 
 function Slider({baseUrl, apiKey}) {
+    //console.log("in Slider apikey is " + apiKey);
     //create state for movie data
     const [upcomingMovies , setUpcomingMovies ] = React.useState([]);
 
     const [index, setIndex] = React.useState(0);
 
     const [currentRating, setCurrentRating] = React.useState(0);
-    const imgBase = "https://image.tmdb.org/t/p/w500";
     //need baseurl for image
+    //const imgBase = "https://image.tmdb.org/t/p/w500";
+    const imgBase = "https://image.tmdb.org/t/p/original";
+    
 
     const sliderStyle = {
         height:"60vh",
@@ -21,17 +24,18 @@ function Slider({baseUrl, apiKey}) {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        position: "relative"
+        position: "relative" //needed for arrows to be absolute
 
     }
 
     //use axios to get data when component loads
     React.useEffect(
         ()=>{
-            console.log('Slider component loaded');
+            //console.log('Slider component loaded');
             axios.get(`${baseUrl}movie/upcoming?api_key=${apiKey}`)
             .then(response => {
-                console.log(response.data.results)
+                //console.log(response.data.results)
+                //store in state
                 setUpcomingMovies(response.data.results)
                 setCurrentRating(Math.round((response.data.results[0].vote_average)/2));
             } )
@@ -71,10 +75,12 @@ function Slider({baseUrl, apiKey}) {
         <div className="movie-info">
             <h1>{upcomingMovies[index]?.title}</h1>
             <p>{upcomingMovies[index]?.overview.slice(0, 120)}</p>
+            <p>Release Date: {upcomingMovies[index]?.release_date}</p>
             <StarRatings rating={currentRating}
                          starRatedColor="red"
                          starDimension="15px"
-                         starSpacong="1px"/>
+                         starSpacing="1px"/>
+                         <p className="see-details">See Details</p>
         </div>
         {/* <img src={`${imgBase}${upcomingMovies[0]?.backdrop_path}` } /> */}
     </div>

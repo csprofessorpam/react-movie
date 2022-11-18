@@ -13,6 +13,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 3; /* needed for Slider to move behind */
+}
+
+.header-light{
+    background-color: var(--white);
 }
 
 .logo{
@@ -71,6 +76,3 @@
     border: solid 1px var(--grey);
 }
 
-.header-light{
-    background-color: var(--white);
-}

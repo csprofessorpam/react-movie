@@ -1,0 +1,18 @@
+
+.movie-card img{
+    width: 200px;
+}
+
+.movie-card{
+    margin: 10px;
+}
+
+.portrait-card{
+    width: 200px;
+    height: 300px;
+}
+
+.landscape-card{
+    width: 200px;
+    height: 100px;
+}
