@@ -1,11 +1,15 @@
 import axios from 'axios';
-import React from 'react'
+import React, {useContext} from 'react'
 import MovieCard from '../../components/MovieCard/MovieCard';
 import Slider from '../../components/Slider/Slider'
 import './Homepage.css'
 
+import { ThemeContext } from '../../contexts/ThemeContext'
 
 function Homepage({baseUrl, apiKey}) {
+
+  //note CURLY brackets here!
+  const {darkMode, setDarkMode} = useContext(ThemeContext)
 
    //https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1
 
@@ -38,7 +42,7 @@ function Homepage({baseUrl, apiKey}) {
    
 
   return (
-    <div className="homepage-container">
+    <div className={darkMode ? "homepage-container" : "homepage-container homepage-light"}>
         <Slider apiKey={apiKey} baseUrl={baseUrl} />
         <div className="movies-wrapper">
           <h2>Popular Movies</h2>
@@ -47,7 +51,7 @@ function Homepage({baseUrl, apiKey}) {
               
               <div className="movie-cards">
                   {
-                  popularMovies.map(item=><MovieCard movie={item} imageUrl={item.poster_path} layout="portrait-card" />)
+                  popularMovies.map(item=><MovieCard key={item.id} movie={item} imageUrl={item.poster_path} layout="portrait-card" />)
                   }
               </div>
             </div>

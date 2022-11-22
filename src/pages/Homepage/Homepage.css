@@ -5,6 +5,9 @@
     color:var(--white);
 }
 
+.homepage-light{
+    background-color: var(--white);
+}
 .movie-cards{
     display: flex;
     flex-wrap: wrap;
