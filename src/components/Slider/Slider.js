@@ -4,9 +4,14 @@ import './Slider.css'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import StarRatings from 'react-star-ratings';
 
-function Slider({baseUrl, apiKey}) {
+function Slider() {
     //console.log("in Slider apikey is " + apiKey);
     //create state for movie data
+
+    const apiKey=process.env.REACT_APP_API_KEY;
+    const baseUrl=process.env.REACT_APP_BASE_URL;
+    const imgBase=process.env.REACT_APP_IMAGE_BASE_URL;
+
     const [upcomingMovies , setUpcomingMovies ] = React.useState([]);
 
     const [index, setIndex] = React.useState(0);
@@ -14,7 +19,7 @@ function Slider({baseUrl, apiKey}) {
     const [currentRating, setCurrentRating] = React.useState(0);
     //need baseurl for image
     //const imgBase = "https://image.tmdb.org/t/p/w500";
-    const imgBase = "https://image.tmdb.org/t/p/original";
+    //const imgBase = "https://image.tmdb.org/t/p/original";
     
 
     const sliderStyle = {
@@ -37,7 +42,7 @@ function Slider({baseUrl, apiKey}) {
                 //console.log(response.data.results)
                 //store in state
                 setUpcomingMovies(response.data.results)
-                setCurrentRating(Math.round((response.data.results[0].vote_average)/2));
+                setCurrentRating(Math.round((response.data.results[0]?.vote_average)/2));
             } )
             .catch(err => console.log(err))
         }, []
@@ -54,14 +59,14 @@ function Slider({baseUrl, apiKey}) {
         // }
         index === upcomingMovies.length - 1? setIndex(0):setIndex(index+1);
         //update rating
-        setCurrentRating(Math.round((upcomingMovies[index].vote_average)/2));
+        setCurrentRating(Math.round((upcomingMovies[index]?.vote_average)/2));
     }
 
     const handleLeft = () =>{
         //setIndex(index - 1);
         index === 0? setIndex(upcomingMovies.length - 1):setIndex(index-1);
         //update rating
-        setCurrentRating(Math.round((upcomingMovies[index].vote_average)/2));
+        setCurrentRating(Math.round((upcomingMovies[index]?.vote_average)/2));
         
 
         
@@ -74,13 +79,17 @@ function Slider({baseUrl, apiKey}) {
         <MdKeyboardArrowRight className="right-arrow" onClick={handleRight} />
         <div className="movie-info">
             <h1>{upcomingMovies[index]?.title}</h1>
-            <p>{upcomingMovies[index]?.overview.slice(0, 120)}</p>
+            <p>{upcomingMovies[index]?.overview?.slice(0, 120)}</p>
             <p>Release Date: {upcomingMovies[index]?.release_date}</p>
-            <StarRatings rating={currentRating}
+            <p>Rating: {upcomingMovies[index]?.vote_average}</p>
+            {/* <StarRatings 
+            // rating = {5}
+             rating={Math.round(upcomingMovies[index]?.vote_average/2)}
                          starRatedColor="red"
                          starDimension="15px"
-                         starSpacing="1px"/>
-                         <p className="see-details">See Details</p>
+                         starSpacing="1px" /> */}
+
+            <p className="see-details">See Details</p>
         </div>
         {/* <img src={`${imgBase}${upcomingMovies[0]?.backdrop_path}` } /> */}
     </div>

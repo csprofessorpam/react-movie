@@ -6,8 +6,10 @@ import './Homepage.css'
 
 import { ThemeContext } from '../../contexts/ThemeContext'
 
-function Homepage({baseUrl, apiKey}) {
+function Homepage() {
 
+  const apiKey=process.env.REACT_APP_API_KEY;
+  const baseUrl=process.env.REACT_APP_BASE_URL;
   //note CURLY brackets here!
   const {darkMode, setDarkMode} = useContext(ThemeContext)
 
@@ -33,8 +35,9 @@ function Homepage({baseUrl, apiKey}) {
     .then(res =>{
       console.log("top rated movies")
       console.log(res.data.results)
+      setTopRatedMovies(res.data.results)
       //set just the first 10
-      setTopRatedMovies(res.data.results.slice(0, 10))
+      //setTopRatedMovies(res.data.results?.slice(0, 10))
     })
     .catch(err=>console.log(err))
      
@@ -43,7 +46,7 @@ function Homepage({baseUrl, apiKey}) {
 
   return (
     <div className={darkMode ? "homepage-container" : "homepage-container homepage-light"}>
-        <Slider apiKey={apiKey} baseUrl={baseUrl} />
+        <Slider  />
         <div className="movies-wrapper">
           <h2>Popular Movies</h2>
           <div className="movie-container">

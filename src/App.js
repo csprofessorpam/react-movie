@@ -28,7 +28,7 @@ function App() {
         <ThemeContextProvider>
           <Header />
           <Routes>
-            <Route path="/" element={<Homepage apiKey={apiKey} baseUrl={baseUrl} />} />
+            <Route path="/" element={<Homepage  />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/moviedetails/:movieId" element={<MovieDetails apiKey={apiKey} baseUrl={baseUrl} />} />
