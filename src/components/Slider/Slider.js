@@ -44,10 +44,10 @@ function Slider() {
                 //console.log(response.data.results)
                 //store in state
                 setUpcomingMovies(response.data.results)
-                setCurrentRating(Math.round((response.data.results[0]?.vote_average)/2));
+                setCurrentRating(response.data.results[index]?.vote_average/2);
             } )
             .catch(err => console.log(err))
-        }, []
+        }, [index]
     )
 
     const handleRight = () =>{
@@ -62,14 +62,14 @@ function Slider() {
         index === upcomingMovies.length - 1? 
         setIndex(0):setIndex(index+1);
         //update rating
-        setCurrentRating(Math.round(upcomingMovies[index]?.vote_average/2));
+        //setCurrentRating(Math.round(upcomingMovies[index]?.vote_average/2));
     }
 
     const handleLeft = () =>{
         //setIndex(index - 1);
         index === 0? setIndex(upcomingMovies.length - 1):setIndex(index-1);
         //update rating
-        setCurrentRating(Math.round(upcomingMovies[index]?.vote_average/2));
+        //setCurrentRating(Math.round(upcomingMovies[index]?.vote_average/2));
         
 
         
