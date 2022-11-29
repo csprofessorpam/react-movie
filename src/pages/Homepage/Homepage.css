@@ -7,7 +7,42 @@
 
 .homepage-light{
     background-color: var(--white);
+    color: black;
 }
+
+.movies-wrapper{
+    display: flex;
+    padding: 20px;
+}
+
+.popular-container{
+    
+    padding: 0 20px;
+}
+
+.popular-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.top-rated-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+}
+
+.page-numbers{
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    cursor: pointer;
+}
+/*
+.top-rated-container{
+    width: 20%;
+}
+
 .movie-cards{
     display: flex;
     flex-wrap: wrap;
@@ -22,14 +57,7 @@
     align-items: center;
 }
 
-.movie-container{
-    display: flex;
-}
 
-.popular-container{
-    width: 80%;
-}
 
-.top-rated-container{
-    width: 20%;
-}
+
+*/

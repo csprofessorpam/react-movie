@@ -3,6 +3,7 @@ import axios from 'axios'
 import './Slider.css'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import StarRatings from 'react-star-ratings';
+import Rating from '../Rating/Rating';
 
 function Slider() {
     //console.log("in Slider apikey is " + apiKey);
@@ -11,6 +12,7 @@ function Slider() {
     const apiKey=process.env.REACT_APP_API_KEY;
     const baseUrl=process.env.REACT_APP_BASE_URL;
     const imgBase=process.env.REACT_APP_IMAGE_BASE_URL;
+    console.log("imgBase", imgBase);
 
     const [upcomingMovies , setUpcomingMovies ] = React.useState([]);
 
@@ -57,16 +59,17 @@ function Slider() {
         // else{
         //     setIndex(index + 1);
         // }
-        index === upcomingMovies.length - 1? setIndex(0):setIndex(index+1);
+        index === upcomingMovies.length - 1? 
+        setIndex(0):setIndex(index+1);
         //update rating
-        setCurrentRating(Math.round((upcomingMovies[index]?.vote_average)/2));
+        setCurrentRating(Math.round(upcomingMovies[index]?.vote_average/2));
     }
 
     const handleLeft = () =>{
         //setIndex(index - 1);
         index === 0? setIndex(upcomingMovies.length - 1):setIndex(index-1);
         //update rating
-        setCurrentRating(Math.round((upcomingMovies[index]?.vote_average)/2));
+        setCurrentRating(Math.round(upcomingMovies[index]?.vote_average/2));
         
 
         
@@ -89,6 +92,7 @@ function Slider() {
                          starDimension="15px"
                          starSpacing="1px" /> */}
 
+            <Rating stars={currentRating}/>
             <p className="see-details">See Details</p>
         </div>
         {/* <img src={`${imgBase}${upcomingMovies[0]?.backdrop_path}` } /> */}

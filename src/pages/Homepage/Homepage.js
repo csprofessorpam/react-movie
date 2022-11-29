@@ -20,11 +20,16 @@ function Homepage() {
 
    const [topRatedMovies, setTopRatedMovies] = React.useState([]);
 
+   //create array with page numbers
+   const pageNumbers = [1,2,3,4,5,6,7,8,9,10];
+   //create state for page number
+   const [page, setPage] = React.useState(3);
+
    React.useEffect(() => {
     //call api to get popular movies
-    axios.get(`${baseUrl}movie/popular?api_key=${apiKey}`)
+    axios.get(`${baseUrl}movie/popular?api_key=${apiKey}&page=${page}`)
     .then(res =>{
-      //console.log(res.data.results)
+      console.log(res.data.results)
       setPopularMovies(res.data.results)
     })
     .catch(err=>console.log(err))
@@ -41,13 +46,56 @@ function Homepage() {
     })
     .catch(err=>console.log(err))
      
-   }, [])
+   }, [page])
    
 
   return (
     <div className={darkMode ? "homepage-container" : "homepage-container homepage-light"}>
         <Slider  />
         <div className="movies-wrapper">
+          <div className="popular-container">
+            <h3>Popular Movies</h3>
+            <div className="popular-wrapper">
+              {/* Popular Movie Cards */}
+              {/* {
+                  popularMovies.map(item=><p>{item.title}</p>)
+              } */}
+              {
+                  popularMovies.map(item=><MovieCard movie={item}
+                                           imageUrl={item.poster_path} 
+                                           imgHeight="300px"
+                                           cardStyle="popular-card"
+                                           radius="16px" />)
+              }
+            </div>
+            <div className="page-numbers">
+              <p>Select Page</p>
+              {
+                pageNumbers.map(num => <p 
+                  onClick={()=>setPage(num)}>{num}</p>)
+              }
+            </div>
+
+          </div>
+          <div className="top-rated-container">
+            <h3>Top Rated Movies</h3>
+            <div className="top-rated-wrapper">
+              {/* Top Rated Movie Cards */}
+              {/* {
+                  topRatedMovies.map(item=><p>{item.title}</p>)
+              } */}
+              {
+                  popularMovies.map(item=><MovieCard movie={item}
+                                          imageUrl={item.backdrop_path} 
+                                          imgHeight="100px"
+                                          cardStyle="top-rated-card"
+                                          radius="8px" />)
+              }
+            </div>
+
+          </div>
+        </div>
+        {/* <div className="movies-wrapper">
           <h2>Popular Movies</h2>
           <div className="movie-container">
             <div className="popular-container">
@@ -65,7 +113,7 @@ function Homepage() {
             </div>
           </div>
 
-        </div>
+        </div> */}
     </div>
   )
 }
