@@ -4,6 +4,8 @@ import './Slider.css'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import StarRatings from 'react-star-ratings';
 import Rating from '../Rating/Rating';
+import Genres from '../Genres/Genres';
+
 
 function Slider() {
     //console.log("in Slider apikey is " + apiKey);
@@ -93,6 +95,7 @@ function Slider() {
                          starSpacing="1px" /> */}
 
             <Rating stars={currentRating}/>
+            <Genres />
             <p className="see-details">See Details</p>
         </div>
         {/* <img src={`${imgBase}${upcomingMovies[0]?.backdrop_path}` } /> */}
