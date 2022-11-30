@@ -1,6 +1,8 @@
 import React from 'react'
 import './MovieCard.css'
 import {Link} from 'react-router-dom'
+import Rating from '../Rating/Rating';
+
 
 //needs to be customized with width, height, imageUrl
 function MovieCard({movie, imageUrl, imgHeight, cardStyle, radius}) {
@@ -34,11 +36,12 @@ function MovieCard({movie, imageUrl, imgHeight, cardStyle, radius}) {
       <div style={imageStyle}>
           {/* MovieCard */}
           <div className="movie-info-top">
-              <p>{movie.vote_average}</p>
+              {/* <p>{movie.vote_average}</p> */}
+              <Rating stars={movie.vote_average/2} />
           </div>
           <div className="movie-info-bottom">
               <p>{movie.title}</p>
-              <p>Rating: {movie.vote_average}</p>
+              <p>Rating: {movie.vote_average/2}</p>
           </div>
       </div>
       {

@@ -10,7 +10,7 @@ import './MovieDetails.css'
 function MovieDetails({baseUrl, apiKey}) {
   //need to get the param
   const params = useParams();
-  console.log("param is " , params.movieId);
+  //console.log("param is " , params.movieId);
 
   //now you need to request data from api
   //store in state

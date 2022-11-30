@@ -14,7 +14,7 @@ function Slider() {
     const apiKey=process.env.REACT_APP_API_KEY;
     const baseUrl=process.env.REACT_APP_BASE_URL;
     const imgBase=process.env.REACT_APP_IMAGE_BASE_URL;
-    console.log("imgBase", imgBase);
+    //console.log("imgBase", imgBase);
 
     const [upcomingMovies , setUpcomingMovies ] = React.useState([]);
 
@@ -95,7 +95,7 @@ function Slider() {
                          starSpacing="1px" /> */}
 
             <Rating stars={currentRating}/>
-            <Genres />
+            <Genres movieGenres={upcomingMovies[index]?.genre_ids}/>
             <p className="see-details">See Details</p>
         </div>
         {/* <img src={`${imgBase}${upcomingMovies[0]?.backdrop_path}` } /> */}

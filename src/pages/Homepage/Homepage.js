@@ -29,7 +29,7 @@ function Homepage() {
     //call api to get popular movies
     axios.get(`${baseUrl}movie/popular?api_key=${apiKey}&page=${page}`)
     .then(res =>{
-      console.log(res.data.results)
+      //console.log(res.data.results)
       setPopularMovies(res.data.results)
     })
     .catch(err=>console.log(err))
@@ -38,7 +38,7 @@ function Homepage() {
 
     axios.get(`${baseUrl}movie/top_rated?api_key=${apiKey}`)
     .then(res =>{
-      console.log("top rated movies")
+      //console.log("top rated movies")
       console.log(res.data.results)
       setTopRatedMovies(res.data.results)
       //set just the first 10
