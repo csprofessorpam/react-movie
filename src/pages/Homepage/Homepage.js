@@ -34,20 +34,26 @@ function Homepage() {
     })
     .catch(err=>console.log(err))
 
+     
+   }, [page])
+   
+
+   React.useEffect(() => {
+
     //call api to get top rated movies
 
     axios.get(`${baseUrl}movie/top_rated?api_key=${apiKey}`)
     .then(res =>{
       //console.log("top rated movies")
-      console.log(res.data.results)
+      //console.log(res.data.results)
       setTopRatedMovies(res.data.results)
       //set just the first 10
       //setTopRatedMovies(res.data.results?.slice(0, 10))
     })
     .catch(err=>console.log(err))
      
-   }, [page])
-   
+   }, [])
+
 
   return (
     <div className={darkMode ? "homepage-container" : "homepage-container homepage-light"}>
@@ -61,7 +67,8 @@ function Homepage() {
                   popularMovies.map(item=><p>{item.title}</p>)
               } */}
               {
-                  popularMovies.map(item=><MovieCard movie={item}
+                  popularMovies.map(item=><MovieCard key={item.id}
+                                           movie={item}
                                            imageUrl={item.poster_path} 
                                            imgHeight="300px"
                                            cardStyle="popular-card"
@@ -71,7 +78,7 @@ function Homepage() {
             <div className="page-numbers">
               <p>Select Page</p>
               {
-                pageNumbers.map(num => <p 
+                pageNumbers.map(num => <p key={num} 
                   onClick={()=>setPage(num)}>{num}</p>)
               }
             </div>
@@ -85,7 +92,8 @@ function Homepage() {
                   topRatedMovies.map(item=><p>{item.title}</p>)
               } */}
               {
-                  popularMovies.map(item=><MovieCard movie={item}
+                  topRatedMovies.map(item=><MovieCard key={item.id} 
+                                         movie={item}
                                           imageUrl={item.backdrop_path} 
                                           imgHeight="100px"
                                           cardStyle="top-rated-card"

@@ -6,6 +6,8 @@ import StarRatings from 'react-star-ratings';
 import Rating from '../Rating/Rating';
 import Genres from '../Genres/Genres';
 
+import {Link} from 'react-router-dom'
+
 
 function Slider() {
     //console.log("in Slider apikey is " + apiKey);
@@ -87,20 +89,29 @@ function Slider() {
             <p>{upcomingMovies[index]?.overview?.slice(0, 120)}</p>
             <p>Release Date: {upcomingMovies[index]?.release_date}</p>
             <p>Rating: {upcomingMovies[index]?.vote_average}</p>
-            {/* <StarRatings 
+            
+            <Rating stars={currentRating}/>
+            {/* <Rating stars={upcomingMovies[index]?.vote_average/2} /> */}
+            
+            <Genres movieGenres={upcomingMovies[index]?.genre_ids} />
+
+            <Link to={`/moviedetails/${upcomingMovies[index]?.id}`}
+                className="movie-link" >
+                See Details
+            </Link>
+        </div>
+       
+    </div>
+  )
+}
+
+export default Slider
+
+{/* <StarRatings 
             // rating = {5}
              rating={Math.round(upcomingMovies[index]?.vote_average/2)}
                          starRatedColor="red"
                          starDimension="15px"
                          starSpacing="1px" /> */}
 
-            <Rating stars={currentRating}/>
-            <Genres movieGenres={upcomingMovies[index]?.genre_ids}/>
-            <p className="see-details">See Details</p>
-        </div>
-        {/* <img src={`${imgBase}${upcomingMovies[0]?.backdrop_path}` } /> */}
-    </div>
-  )
-}
-
-export default Slider
+{/* <img src={`${imgBase}${upcomingMovies[0]?.backdrop_path}` } /> */}

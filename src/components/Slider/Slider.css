@@ -33,3 +33,13 @@
     color: var(--white);
     padding: 20px;
 }
+
+.movie-link{
+    color: var(--white);
+    cursor: pointer;
+}
+
+.movie-link:hover{
+    
+    color: var(--red);
+}

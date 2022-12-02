@@ -3,3 +3,41 @@
     min-height:100vh;
     color:var(--white);
 }
+
+
+
+.trailer-container{
+    position:relative;
+    padding-top:56.25%;
+}
+.trailer-container-blank{
+    position:relative;
+    padding-top:56.25%;
+    color:var(--red);
+}
+.trailer-container-blank p{
+    background-color:var(--dark-bg)
+}
+.trailer-player{
+    position: absolute;
+    top: 0;
+    left: 0; 
+}
+
+.info-container{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.details-poster{
+    width:280px;
+    border-radius: 8px;
+}
+
+.movie-details-info{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

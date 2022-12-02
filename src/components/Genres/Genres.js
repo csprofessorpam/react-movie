@@ -44,8 +44,8 @@ function Genres({movieGenres}) {
   
   return (
     <div className="genre-container">
-      <p>Genres:&nbsp;</p>
-      <p>{genreList()}</p>
+      {/* <p>Genres:&nbsp;</p> */}
+      <p>Genres:&nbsp;&nbsp;{genreList()}</p>
       {/* {
         movieGenres.map(id =>{
           //find name for this id
