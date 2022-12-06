@@ -10,6 +10,7 @@ import ThemeContextProvider from './contexts/ThemeContext'
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
 import MovieDetails from './pages/MovieDetails/MovieDetails';
+import Header2 from './components/Header2/Header2';
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <ThemeContextProvider>
-          <Header />
+          <Header2 />
           <Routes>
             <Route path="/" element={<Homepage  />} />
             <Route path="/about" element={<About />} />

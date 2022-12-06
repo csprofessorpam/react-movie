@@ -3,7 +3,9 @@ import React from 'react'
 import {useParams} from 'react-router-dom'
 import './MovieDetails.css'
 
+
 import ReactPlayer from 'react-player'
+import Review from '../../components/Review/Review';
 
 //need to grab param
 
@@ -14,7 +16,7 @@ function MovieDetails() {
   const baseUrl=process.env.REACT_APP_BASE_URL;
   const imgBase=process.env.REACT_APP_IMAGE_BASE_URL;
   //need to get the param
-  const params = useParams();
+  //const params = useParams();
   //console.log("param is " , params.movieId);
   const {movieId} = useParams();
   console.log(movieId);
@@ -24,6 +26,8 @@ function MovieDetails() {
   const [movie, setMovie] = React.useState({});
 
   const [videoLink, setVideoLink] = React.useState('')
+
+  const [reviews, setReviews] = React.useState([])
 
   //endpoint for videos
   //https://api.themoviedb.org/3/movie/653851/videos?api_key=c315ba96d8b132c0836df2e55986edc6
@@ -45,7 +49,7 @@ function MovieDetails() {
       .then(res=>{
         //console.log(res.data.results)
         //filter to find the ones with "YouTube" and "Trailer"
-        console.log(res.data.results.filter(item => item.site==="YouTube" && item.type==="Trailer"))
+        //console.log(res.data.results.filter(item => item.site==="YouTube" && item.type==="Trailer"))
 
         const youTubeLinks = res.data.results.filter(item => item.site==="YouTube" && item.type==="Trailer")
 
@@ -55,6 +59,14 @@ function MovieDetails() {
 
         //https://www.youtube.com/watch?v=nIvBBd8pU1s
 
+      })
+      .catch(err=>console.log(err))
+
+      //get reviews
+      axios.get(`${baseUrl}movie/${movieId}/reviews?api_key=${apiKey}`)
+      .then(res=>{
+        console.log(res.data.results)
+        setReviews(res.data.results);
       })
       .catch(err=>console.log(err))
 
@@ -101,7 +113,12 @@ function MovieDetails() {
       
       </div>
       <div className="review-container">
-        Reviews here
+        {
+          reviews.map(item=><Review review={item} />)
+        }
+        {/* {
+          reviews.map(item => <p>{item.content}</p>)
+        } */}
       </div>
 
     </div>

@@ -2,5 +2,7 @@
     color:var(--white);
     background-color:var(--light-bg);
     height: 50px;
+    display: flex;
+    align-items: center;
     
 }
