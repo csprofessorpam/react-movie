@@ -4,9 +4,11 @@ import {Link} from 'react-router-dom'
 import Rating from '../Rating/Rating';
 
 
+
 //needs to be customized with width, height, imageUrl
 function MovieCard({movie, imageUrl, imgHeight, cardStyle, radius}) {
 
+   
     const apiKey=process.env.REACT_APP_API_KEY;
     const baseUrl=process.env.REACT_APP_BASE_URL;
     const imgBase=process.env.REACT_APP_IMAGE_BASE_URL;
@@ -32,7 +34,8 @@ function MovieCard({movie, imageUrl, imgHeight, cardStyle, radius}) {
   return (
 
     // <div className="movie-card">
-      <div className={cardStyle}>
+      // <div className={cardStyle}>
+      <Link  to={`/moviedetails/${movie.id}`} className={cardStyle}>
       <div style={imageStyle}>
           {/* MovieCard */}
           <div className="movie-info-top">
@@ -49,7 +52,8 @@ function MovieCard({movie, imageUrl, imgHeight, cardStyle, radius}) {
       <p>{movie.title}</p>:
       null
       }
-    </div>
+    {/* </div> */}
+    </Link>
     
   )
 }

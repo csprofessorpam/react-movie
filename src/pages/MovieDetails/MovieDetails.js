@@ -7,6 +7,9 @@ import './MovieDetails.css'
 import ReactPlayer from 'react-player'
 import Review from '../../components/Review/Review';
 
+import { ThemeContext } from '../../contexts/ThemeContext'
+import Rating from '../../components/Rating/Rating';
+
 //need to grab param
 
 
@@ -15,6 +18,10 @@ function MovieDetails() {
   const apiKey=process.env.REACT_APP_API_KEY;
   const baseUrl=process.env.REACT_APP_BASE_URL;
   const imgBase=process.env.REACT_APP_IMAGE_BASE_URL;
+
+  //note CURLY brackets here!
+  const {darkMode, setDarkMode} = React.useContext(ThemeContext)
+
   //need to get the param
   //const params = useParams();
   //console.log("param is " , params.movieId);
@@ -24,10 +31,14 @@ function MovieDetails() {
   //now you need to request data from api
   //store in state
   const [movie, setMovie] = React.useState({});
+  const [rating, setRating] = React.useState(0);
 
   const [videoLink, setVideoLink] = React.useState('')
 
   const [reviews, setReviews] = React.useState([])
+
+  const [reviewNumber, setReviewNumber] = React.useState(3);
+  const [totalReviews, setTotalReviews] = React.useState(0);
 
   //endpoint for videos
   //https://api.themoviedb.org/3/movie/653851/videos?api_key=c315ba96d8b132c0836df2e55986edc6
@@ -41,6 +52,7 @@ function MovieDetails() {
       .then(res=>{
         //console.log(res.data)
         setMovie(res.data)
+        setRating(res.data.vote_average / 2)
       })
       .catch(err=>console.log(err))
 
@@ -65,16 +77,19 @@ function MovieDetails() {
       //get reviews
       axios.get(`${baseUrl}movie/${movieId}/reviews?api_key=${apiKey}`)
       .then(res=>{
-        console.log(res.data.results)
+        console.log(res.data)
         setReviews(res.data.results);
+        setTotalReviews(res.data.total_results);
       })
       .catch(err=>console.log(err))
 
     }, []
   )
 
+  //<div className={darkMode ? "header-container" : "header-container header-light"}>
+
   return (
-    <div className="details-container">
+    <div className={darkMode ? "details-container" : "details-container details-light"}>
 
       {
         videoLink ?
@@ -99,6 +114,8 @@ function MovieDetails() {
 
       }
       
+      <h2>{movie?.original_title}</h2>
+      <Rating stars={rating} />
 
       <div className="info-container">
         <img src={`${imgBase}/${movie?.poster_path}`} 
@@ -114,12 +131,19 @@ function MovieDetails() {
       </div>
       <div className="review-container">
         {
-          reviews.map(item=><Review review={item} />)
+          reviews.slice(0, reviewNumber).map(item=><Review review={item} />)
         }
         {/* {
           reviews.map(item => <p>{item.content}</p>)
         } */}
       </div>
+      {
+        reviewNumber <= totalReviews?
+        
+        <p onClick={()=>setReviewNumber(reviewNumber + 3)}>Read more reviews</p>
+        :
+        <p onClick={()=>setReviewNumber(3)}>End of reviews</p>
+      }
 
     </div>
   )

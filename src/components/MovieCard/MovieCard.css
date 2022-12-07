@@ -12,6 +12,10 @@
     margin: 10px;
 }
 
+.top-rated-card p{
+    color: red;
+}
+
 .popular-card:hover .movie-info-top, 
 .popular-card:hover .movie-info-bottom{
     opacity: 1;

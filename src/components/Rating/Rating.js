@@ -3,7 +3,7 @@ import StarRatings from 'react-star-ratings';
 
 function Rating({stars}) {
   return (
-    <div>
+    <div style={{margin: "20px"}}>
         <StarRatings 
              //rating = {3.5}
             rating={stars}
