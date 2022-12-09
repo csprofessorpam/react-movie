@@ -4,6 +4,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Homepage from './pages/Homepage/Homepage';
 
+
 import {BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import ThemeContextProvider from './contexts/ThemeContext'
@@ -11,6 +12,9 @@ import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
 import MovieDetails from './pages/MovieDetails/MovieDetails';
 import Header2 from './components/Header2/Header2';
+import Signup from './pages/Users/Signup';
+import Signin from './pages/Users/Signin';
+
 
 function App() {
 
@@ -33,6 +37,9 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/moviedetails/:movieId" element={<MovieDetails  />} />
+            <Route path="/signup" element={<Signup  />} />
+            <Route path="/signin" element={<Signin  />} />
+
           </Routes>
         </ThemeContextProvider>
         

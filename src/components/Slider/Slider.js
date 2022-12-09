@@ -86,7 +86,7 @@ function Slider() {
         <MdKeyboardArrowRight className="right-arrow" onClick={handleRight} />
         <div className="movie-info">
             <h1>{upcomingMovies[index]?.title}</h1>
-            <p>{upcomingMovies[index]?.overview?.slice(0, 120)}</p>
+            <p>{upcomingMovies[index]?.overview?.slice(0, 120)}...</p>
             <p>Release Date: {upcomingMovies[index]?.release_date}</p>
             <p>Rating: {upcomingMovies[index]?.vote_average}</p>
             

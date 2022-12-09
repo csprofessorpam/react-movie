@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import './Header2.css'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
 import { ThemeContext } from '../../contexts/ThemeContext'
@@ -11,6 +11,8 @@ function Header2() {
   //note CURLY brackets here!
   const {darkMode, setDarkMode} = useContext(ThemeContext)
 
+  //activate useNavigate hook
+  const navigate = useNavigate();
 
   //for light/dark changing
   const handleTheme = () =>{
@@ -45,7 +47,8 @@ function Header2() {
             }
           {/* </div> */}
           {/* <div> */}
-            <button className="create-account-btn">Create an account</button>
+            <button className="create-account-btn"
+            onClick={()=>navigate('/signup')}>Create an account</button>
           {/* </div> */}
         </div>
     </div>
