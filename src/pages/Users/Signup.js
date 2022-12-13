@@ -37,7 +37,7 @@ function Signup() {
         .catch(err=>console.log(err))
     }
   return (
-    <div className="signing-container">
+    <div className="sign-container">
         <form className="signup-form" onSubmit={handleSubmit}>
             <div className="title-container">
                 <h1>Sign Up</h1>
@@ -69,8 +69,8 @@ function Signup() {
                 success?
                 <p>You are signed up successfully.</p>
                 :
-                <p className="sign-message">Already have an account? 
-                <Link to="/signin">Signin</Link></p>
+                <p className="sign-message">Already have an account? &nbsp;
+                <Link to="/signin" className="red-text">Signin</Link></p>
 
             }
         </form>

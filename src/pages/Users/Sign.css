@@ -1,4 +1,4 @@
-.signing-container{
+.sign-container{
     margin-top:var(--header-height);
     min-height:100vh;
     color:var(--white);
@@ -59,4 +59,9 @@
 
 .sign-btn{
     background-color: green;
+}
+
+.red-text{
+    color: red;
+    font-style: italic;
 }
