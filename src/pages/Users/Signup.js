@@ -14,7 +14,8 @@ function Signup() {
     const[username, setUsername] = React.useState('')
     const[success, setSuccess] = React.useState(false)
 
-    const handleSubmit = (e)=>{
+
+    const handleSignup = (e)=>{
         e.preventDefault();
         console.log(email, password, username);
         //call api to pass data to server
@@ -38,7 +39,7 @@ function Signup() {
     }
   return (
     <div className="sign-container">
-        <form className="signup-form" onSubmit={handleSubmit}>
+        <form className="signup-form" onSubmit={handleSignup}>
             <div className="title-container">
                 <h1>Sign Up</h1>
                 <p>Please fill in this form to create an account.</p>
@@ -67,12 +68,15 @@ function Signup() {
             </div>
             {
                 success?
-                <p>You are signed up successfully.</p>
+                <p>You are signed up successfully.
+                    <Link to="/signin" className="red-text">Signin</Link></p>
+            
                 :
                 <p className="sign-message">Already have an account? &nbsp;
                 <Link to="/signin" className="red-text">Signin</Link></p>
 
             }
+            
         </form>
     </div>
   )

@@ -10,10 +10,14 @@ function Signin() {
     const[password, setPassword] = React.useState('')
     const[username, setUsername] = React.useState('')
 
+    const handleSignin = (e)=>{
+      e.preventDefault();
+    }
+
 
   return (
     <div className="sign-container">
-        <form className="signup-form" >
+        <form className="signup-form" onSubmit={handleSignin}>
             <div className="title-container">
                 <h1>Sign In</h1>
                 <p>Please fill in this form to login.</p>
