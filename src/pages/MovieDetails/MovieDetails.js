@@ -126,7 +126,7 @@ function MovieDetails() {
             <h4>Status: <span>{movie?.status}</span></h4>
             <h4>Runtime: <span>{movie?.runtime}</span></h4>
             <h4>Budget: <span>{movie?.budget}</span></h4>
-        </div>
+        </div> 
       
       </div>
       <div className="review-container">

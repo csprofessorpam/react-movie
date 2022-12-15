@@ -5,15 +5,21 @@ import Header from './components/Header/Header';
 import Homepage from './pages/Homepage/Homepage';
 
 
+
 import {BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import ThemeContextProvider from './contexts/ThemeContext'
+
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
 import MovieDetails from './pages/MovieDetails/MovieDetails';
 import Header2 from './components/Header2/Header2';
 import Signup from './pages/Users/Signup';
 import Signin from './pages/Users/Signin';
+import ContextReducer from './contexts/index';
+import MyFavorites from './pages/MyFavorites/MyFavorites';
+//import ThemeContextProvider from './contexts/ThemeContext'
+//import UserContextProvider from './contexts/UserContext';
+
 
 
 function App() {
@@ -29,8 +35,12 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <ThemeContextProvider>
+      {/* <BrowserRouter> */}
+
+        {/* <UserContextProvider>
+        <ThemeContextProvider> */}
+        <ContextReducer>
+
           <Header2 />
           <Routes>
             <Route path="/" element={<Homepage  />} />
@@ -39,13 +49,17 @@ function App() {
             <Route path="/moviedetails/:movieId" element={<MovieDetails  />} />
             <Route path="/signup" element={<Signup  />} />
             <Route path="/signin" element={<Signin  />} />
+            <Route path="/myfavorites" element={<MyFavorites  />} />
 
           </Routes>
-        </ThemeContextProvider>
+          <Footer />
+          </ContextReducer>
+        {/* </ThemeContextProvider>
+        </UserContextProvider> */}
         
        
-        <Footer />
-      </BrowserRouter>
+        
+      {/* </BrowserRouter> */}
     </div>
   );
 }

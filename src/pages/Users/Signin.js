@@ -1,17 +1,47 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
+import { UserContext } from '../../contexts/UserContext';
+
+import {useNavigate} from 'react-router-dom'
 
 function Signin() {
+
+  //set up global state
+  const {user, setUser, token, setToken} = React.useContext(UserContext);  //get initial values from UserContext
+
+  let navigate = useNavigate();
+
 
   const serverUrl=process.env.REACT_APP_SERVER_URL;
     //console.log(serverUrl);
     //create state for form inputs
     const [email, setEmail] = React.useState("")
     const[password, setPassword] = React.useState('')
-    const[username, setUsername] = React.useState('')
+    
 
     const handleSignin = (e)=>{
       e.preventDefault();
+      //console.log(email, password);
+      //make api call to login
+      axios.post(`${serverUrl}/users/login`, {email, password})
+      .then(res => {
+        console.log(res.data);
+        //returns user data and a token
+        //set global state
+        setUser(res.data)
+        setToken(res.data.token)
+        //save in localstorage
+        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('userInfo', JSON.stringify(res.data))
+        
+
+      })
+      .catch(err => console.log(err))
+      //navigate to homepage
+      navigate('/')
+
+      //clear form later
     }
 
 
@@ -37,7 +67,7 @@ function Signin() {
             
             <div className="button-container">
                 <button type="reset" className="cancel-btn">Cancel</button>
-                <button type="submit" className="sign-btn">Sign up</button>
+                <button type="submit" className="sign-btn">Sign in</button>
             </div>
             <p className="sign-message">Don't have an account? &nbsp;
                 <Link to="/signup" className="red-text">Signup</Link></p>

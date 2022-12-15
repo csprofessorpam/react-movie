@@ -4,12 +4,17 @@ import {Link, useNavigate} from 'react-router-dom'
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
 import { ThemeContext } from '../../contexts/ThemeContext'
+import { UserContext } from '../../contexts/UserContext';
 
 
 function Header2() {
 
-  //note CURLY brackets here!
+  //note CURLY brackets here to access global state!
   const {darkMode, setDarkMode} = useContext(ThemeContext)
+
+  const {user, setUser, token, setToken} = React.useContext(UserContext);
+
+  const [profileOptions, setProfileOptions] = React.useState(false);
 
   //activate useNavigate hook
   const navigate = useNavigate();
@@ -24,15 +29,22 @@ function Header2() {
   }
   //const darkMode=false;
 
+  const handleLogout = ()=>{
+    //clear local storage
+      localStorage.clear()
+      setUser('')
+      setToken('')
+      //navigate to homepage
+      navigate('/')
+  }
+
   return (
     <div className={darkMode ? "header-container" : "header-container header-light"}>
         <Link to="/" className = "logo">CineTrail</Link>
-        {/* <div className="search-container"> */}
-          <input placeholder="Search movies..." className="search-input" />
-        {/* </div> */}
-        <div className="header-buttons-container">
-          {/* <div className="theme-button-container"> */}
-            
+        
+        <input placeholder="Search movies..." className="search-input" />
+        
+        <div className="header-buttons-container">           
             {
               darkMode?
               <div className="theme-buttons" >
@@ -45,11 +57,29 @@ function Header2() {
                 <MdOutlineDarkMode onClick={handleTheme} className="theme-icon" />
               </div>
             }
-          {/* </div> */}
-          {/* <div> */}
-            <button className="create-account-btn"
+          
+            {
+              token?
+              <div className="profile-container">
+                <img src={user.image_url} className="profile-img"
+                onClick={()=>setProfileOptions(!profileOptions)}/>
+                <p>Welcome {user.username}</p>
+                {
+                  profileOptions?
+                  <div className="fav-div">
+                    <Link to="/myfavorites">MyFavorites</Link>
+                    <p className="logout" onClick={handleLogout}>Logout</p>
+                  </div>
+                  :
+                  null
+                }
+              </div>
+              :
+              <button className="create-account-btn"
             onClick={()=>navigate('/signup')}>Create an account</button>
-          {/* </div> */}
+            }
+            
+          
         </div>
     </div>
   )
