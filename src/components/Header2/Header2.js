@@ -5,9 +5,14 @@ import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
 import { ThemeContext } from '../../contexts/ThemeContext'
 import { UserContext } from '../../contexts/UserContext';
+import axios, { AxiosHeaders } from 'axios'
+import SearchResult from '../SearchResult/SearchResult';
+
 
 
 function Header2() {
+  const apiKey=process.env.REACT_APP_API_KEY;
+  const baseUrl=process.env.REACT_APP_BASE_URL;
 
   //note CURLY brackets here to access global state!
   const {darkMode, setDarkMode} = useContext(ThemeContext)
@@ -15,6 +20,10 @@ function Header2() {
   const {user, setUser, token, setToken} = React.useContext(UserContext);
 
   const [profileOptions, setProfileOptions] = React.useState(false);
+
+  //create state for search boar
+  const [query, setQuery] = React.useState('')
+  const [queryResults, setQueryResults] = React.useState([])
 
   //activate useNavigate hook
   const navigate = useNavigate();
@@ -38,12 +47,43 @@ function Header2() {
       navigate('/')
   }
 
+  const handleSearch = (e) =>{
+    //
+    //console.log("search")
+    //console.log(e);
+    //input is targer that triggered this event
+    //set query to search text from input box
+    setQuery(e.target.value);
+
+    //https://api.themoviedb.org/3/search/movie?api_key=c315ba96d8b132c0836df2e55986edc6&query=king
+
+    axios.get(`${baseUrl}search/movie?api_key=${apiKey}&query=${query}`)
+    .then(res =>{
+      console.log(res.data.results)
+      setQueryResults(res.data.results)
+    })
+    .catch(err => console.log(err))
+  }
+
   return (
     <div className={darkMode ? "header-container" : "header-container header-light"}>
         <Link to="/" className = "logo">CineTrail</Link>
-        
-        <input placeholder="Search movies..." className="search-input" />
-        
+        <div className="search-container">
+            <input placeholder="Search movies..." className="search-input" 
+                    onChange={handleSearch} />
+            {
+              query !== ''?
+            <div className="search-results-container">
+              {
+                queryResults.map(item=> <SearchResult movie={item} setQuery={setQuery} />)
+                // queryResults.map(item=><p>{item.original_title}</p>)
+              }
+            </div>
+            :
+            null
+            }
+
+        </div>
         <div className="header-buttons-container">           
             {
               darkMode?

@@ -32,7 +32,7 @@
 } */
 
 .search-input{
-    width: 40%;
+    /* width: 40%; */
     border: none;
     padding: 8px;
     border-radius: 8px;
@@ -90,4 +90,19 @@
 .logout{
     color: red;
     cursor: pointer;
+}
+
+.search-container{
+    position: relative;
+    width: 40%;
+}
+.search-results-container{
+    background-color:aliceblue;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    height: 300px;
+    width: 100%;
+    color: black;
+    overflow: scroll;
 }
