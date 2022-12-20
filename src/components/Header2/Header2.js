@@ -57,7 +57,7 @@ function Header2() {
 
     //https://api.themoviedb.org/3/search/movie?api_key=c315ba96d8b132c0836df2e55986edc6&query=king
 
-    axios.get(`${baseUrl}search/movie?api_key=${apiKey}&query=${query}`)
+    axios.get(`${baseUrl}search/movie?api_key=${apiKey}&query=${e.target.value}`)
     .then(res =>{
       console.log(res.data.results)
       setQueryResults(res.data.results)
@@ -70,7 +70,8 @@ function Header2() {
         <Link to="/" className = "logo">CineTrail</Link>
         <div className="search-container">
             <input placeholder="Search movies..." className="search-input" 
-                    onChange={handleSearch} />
+                    onChange={handleSearch} 
+                    value={query} />
             {
               query !== ''?
             <div className="search-results-container">
