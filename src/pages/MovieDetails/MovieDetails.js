@@ -10,6 +10,8 @@ import Review from '../../components/Review/Review';
 import { ThemeContext } from '../../contexts/ThemeContext'
 import Rating from '../../components/Rating/Rating';
 
+import { UserContext } from '../../contexts/UserContext';
+
 //need to grab param
 
 
@@ -18,15 +20,18 @@ function MovieDetails() {
   const apiKey=process.env.REACT_APP_API_KEY;
   const baseUrl=process.env.REACT_APP_BASE_URL;
   const imgBase=process.env.REACT_APP_IMAGE_BASE_URL;
+  const serverUrl=process.env.REACT_APP_SERVER_URL;
 
   //note CURLY brackets here!
   const {darkMode, setDarkMode} = React.useContext(ThemeContext)
+
+  const {user, setUser, token, setToken} = React.useContext(UserContext);
 
   //need to get the param
   //const params = useParams();
   //console.log("param is " , params.movieId);
   const {movieId} = useParams();
-  console.log(movieId);
+  //console.log(movieId);
   //now can use movieId instead of params.movieId
   //now you need to request data from api
   //store in state
@@ -40,9 +45,29 @@ function MovieDetails() {
   const [reviewNumber, setReviewNumber] = React.useState(3);
   const [totalReviews, setTotalReviews] = React.useState(0);
 
+  const [added, setAdded] = React.useState(false);
+
   //endpoint for videos
   //https://api.themoviedb.org/3/movie/653851/videos?api_key=c315ba96d8b132c0836df2e55986edc6
 
+  React.useEffect(
+    //check if this movie has been added
+    ()=>{
+      axios.post(`${serverUrl}/favoriteMovies/search`,{
+        user_id:user?._id,
+        tmdb_id:movie?.id
+      })
+      .then(res =>{
+        //console.log("search result")
+        //console.log(res.data)
+        //change added if necessary
+        if (res.data){
+          setAdded(true)
+        }
+      })
+      .catch(err => console.log(err))
+    }, [user, movie]
+  )
 
   React.useEffect(
     ()=>{
@@ -77,7 +102,7 @@ function MovieDetails() {
       //get reviews
       axios.get(`${baseUrl}movie/${movieId}/reviews?api_key=${apiKey}`)
       .then(res=>{
-        console.log(res.data)
+        //console.log(res.data)
         setReviews(res.data.results);
         setTotalReviews(res.data.total_results);
       })
@@ -86,7 +111,39 @@ function MovieDetails() {
     }, []
   )
 
+  
   //<div className={darkMode ? "header-container" : "header-container header-light"}>
+
+  const addToFavorites = () =>{
+    console.log("added");
+    //check if user is logged in
+    if (!token){
+      alert('Please login to save movies')
+    }
+    else{
+    //button only shows 
+    axios.post(`${serverUrl}/favoriteMovies`,{
+      movie_id:movie.id, 
+      user_id: user._id
+    })
+      .then(res =>{
+        console.log(res.data);
+        //change state so it shows remove
+        setAdded(true);
+      })
+    }
+  }
+
+  const removeFromFavorites = () =>{
+    console.log("remove");
+    //make delete request
+    axios.delete(`${serverUrl}/favoriteMovies/${user._id}/${movie.id}`)
+    .then(res =>{
+      console.log(res)
+      setAdded(false)
+    })
+    .catch(err => console.log(err))
+  }
 
   return (
     <div className={darkMode ? "details-container" : "details-container details-light"}>
@@ -114,9 +171,18 @@ function MovieDetails() {
 
       }
       
-      <h2>{movie?.original_title}</h2>
-      <Rating stars={rating} />
+      <div className="title-container">
+        <h2>{movie?.original_title}</h2>
+        {
+          added?
+          <button onClick={removeFromFavorites} className="btn-remove">Remove from favorites</button>
+          :
+          <button onClick={addToFavorites} className="btn-add">Add to the favorites</button>
 
+        }
+      
+      </div>
+      <Rating stars={rating} />
       <div className="info-container">
         <img src={`${imgBase}/${movie?.poster_path}`} 
              className="details-poster" />

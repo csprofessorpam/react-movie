@@ -52,3 +52,25 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+.title-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-add, .btn-remove{
+    border-radius: 12px;
+    background-color: transparent;
+    padding: 0px;
+    cursor: pointer;
+}
+
+.btn-remove{
+    border: solid 1px green;
+    color: green;
+}
+
+.btn-add{
+    border: solid 1px var(--red);
+    color: var(--red);
+}
