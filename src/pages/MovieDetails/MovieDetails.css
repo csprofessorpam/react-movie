@@ -56,13 +56,15 @@
 .title-container{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .btn-add, .btn-remove{
     border-radius: 12px;
     background-color: transparent;
-    padding: 0px;
+    padding: 10px;
     cursor: pointer;
+    /* height: 20px; */
 }
 
 .btn-remove{

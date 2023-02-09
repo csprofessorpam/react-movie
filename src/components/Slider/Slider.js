@@ -82,6 +82,7 @@ function Slider() {
   return (
     <div className = "slider-container" style={sliderStyle}>
         <div className="slider-overlay"></div>
+        
         <MdKeyboardArrowLeft className="left-arrow" onClick={handleLeft} />
         <MdKeyboardArrowRight className="right-arrow" onClick={handleRight} />
         <div className="movie-info">

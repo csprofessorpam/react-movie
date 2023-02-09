@@ -19,7 +19,8 @@ function TopMovies() {
     .then(res =>{
       //console.log("top rated movies")
       //console.log(res.data.results)
-      setTopRatedMovies(res.data.results)
+      //store just the first 10 to display
+      setTopRatedMovies(res.data.results.slice(0, 10))
       //set just the first 10
       //setTopRatedMovies(res.data.results?.slice(0, 10))
     })

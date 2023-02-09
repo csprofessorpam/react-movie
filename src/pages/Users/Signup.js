@@ -69,13 +69,17 @@ function Signup() {
             {
                 success?
                 <p>You are signed up successfully.
-                    <Link to="/signin" className="red-text">Signin</Link></p>
+                    <Link to="/signin" className="red-text">Signin</Link>
+                </p>
+                    
             
                 :
                 <p className="sign-message">Already have an account? &nbsp;
                 <Link to="/signin" className="red-text">Signin</Link></p>
+                
 
             }
+            
             
         </form>
     </div>
