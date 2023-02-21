@@ -42,6 +42,7 @@ function App() {
         <ContextReducer>
 
           <Header2 />
+          
           <Routes>
             <Route path="/" element={<Homepage  />} />
             <Route path="/about" element={<About />} />

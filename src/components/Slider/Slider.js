@@ -42,17 +42,37 @@ function Slider() {
     //use axios to get data when component loads
     React.useEffect(
         ()=>{
-            //console.log('Slider component loaded');
+            console.log('useEffect index is ', index);
             axios.get(`${baseUrl}movie/upcoming?api_key=${apiKey}`)
             .then(response => {
                 //console.log(response.data.results)
                 //store in state
                 setUpcomingMovies(response.data.results)
-                setCurrentRating(response.data.results[index]?.vote_average/2);
+                console.log((response.data.results[index]?.vote_average)/2)
+                setCurrentRating((response.data.results[index]?.vote_average)/2);
+                console.log("next rating", currentRating)
             } )
             .catch(err => console.log(err))
+
+            // if (currentRating === 0){
+                
+            //     setCurrentRating((upcomingMovies[index]?.vote_average)/2);
+            //     console.log("new rating", currentRating)
+            // }
         }, [index]
     )
+
+    //create a second useEffect just to handle updating the rating
+    /*React.useEffect(
+        ()=>{
+            console.log("index is ", index)
+            console.log("rating before ", currentRating)
+            const nextRating = (upcomingMovies[index+1].vote_average)/2;
+            setCurrentRating(nextRating);
+            //setCurrentRating((upcomingMovies[index]?.vote_average)/2);
+             console.log("rating after ", currentRating)
+        }, [index]
+    )*/
 
     const handleRight = () =>{
         //setIndex(index + 1);
@@ -63,20 +83,22 @@ function Slider() {
         // else{
         //     setIndex(index + 1);
         // }
-        index === upcomingMovies.length - 1? 
-        setIndex(0):setIndex(index+1);
+        index === upcomingMovies?.length - 1? 
+        setIndex(0)
+        :
+        setIndex(index+1);
         //update rating
         //setCurrentRating(Math.round(upcomingMovies[index]?.vote_average/2));
     }
 
     const handleLeft = () =>{
         //setIndex(index - 1);
-        index === 0? setIndex(upcomingMovies.length - 1):setIndex(index-1);
+        index === 0? 
+        setIndex(upcomingMovies?.length - 1)
+        :
+        setIndex(index-1);
         //update rating
-        //setCurrentRating(Math.round(upcomingMovies[index]?.vote_average/2));
-        
-
-        
+        //setCurrentRating(Math.round(upcomingMovies[index]?.vote_average/2));      
     }
 
   return (
@@ -92,7 +114,7 @@ function Slider() {
             <p>Rating: {upcomingMovies[index]?.vote_average}</p>
             
             <Rating stars={currentRating}/>
-            {/* <Rating stars={upcomingMovies[index]?.vote_average/2} /> */}
+            {/* <Rating stars={(upcomingMovies[index]?.vote_average)/2} /> */}
             
             <Genres movieGenres={upcomingMovies[index]?.genre_ids} />
 
