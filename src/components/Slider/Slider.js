@@ -40,17 +40,17 @@ function Slider() {
     }
 
     //use axios to get data when component loads
-    React.useEffect(
+    React.useEffect(   
         ()=>{
-            console.log('useEffect index is ', index);
+            console.log('one ', index);
             axios.get(`${baseUrl}movie/upcoming?api_key=${apiKey}`)
             .then(response => {
                 //console.log(response.data.results)
                 //store in state
                 setUpcomingMovies(response.data.results)
-                console.log((response.data.results[index]?.vote_average)/2)
-                setCurrentRating((response.data.results[index]?.vote_average)/2);
-                console.log("next rating", currentRating)
+                //console.log((response.data.results[index]?.vote_average)/2)
+                setCurrentRating((response.data.results[0]?.vote_average)/2);
+                //console.log("next rating", currentRating)
             } )
             .catch(err => console.log(err))
 
@@ -59,20 +59,23 @@ function Slider() {
             //     setCurrentRating((upcomingMovies[index]?.vote_average)/2);
             //     console.log("new rating", currentRating)
             // }
-        }, [index]
+        }, [] //[index]
     )
 
     //create a second useEffect just to handle updating the rating
-    /*React.useEffect(
+    React.useEffect(
         ()=>{
-            console.log("index is ", index)
-            console.log("rating before ", currentRating)
-            const nextRating = (upcomingMovies[index+1].vote_average)/2;
-            setCurrentRating(nextRating);
-            //setCurrentRating((upcomingMovies[index]?.vote_average)/2);
-             console.log("rating after ", currentRating)
+            console.log("two ", index);
+            if (index > 0){
+            //console.log("index is ", index)
+            //console.log("rating before ", currentRating)
+            //const nextRating = (upcomingMovies[index+1].vote_average)/2;
+            //setCurrentRating(nextRating);
+            setCurrentRating((upcomingMovies[index]?.vote_average)/2);
+             console.log("next rating ", currentRating)
+            }
         }, [index]
-    )*/
+    )
 
     const handleRight = () =>{
         //setIndex(index + 1);
@@ -111,8 +114,9 @@ function Slider() {
             <h1>{upcomingMovies[index]?.title}</h1>
             <p>{upcomingMovies[index]?.overview?.slice(0, 120)}...</p>
             <p>Release Date: {upcomingMovies[index]?.release_date}</p>
-            <p>Rating: {upcomingMovies[index]?.vote_average}</p>
+            <p>Rating: {upcomingMovies[index]?.vote_average/2}</p>
             
+            {/* <Rating stars={4.5}/> */}
             <Rating stars={currentRating}/>
             {/* <Rating stars={(upcomingMovies[index]?.vote_average)/2} /> */}
             

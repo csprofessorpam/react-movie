@@ -1,5 +1,5 @@
 import React from 'react'
-import './Sign.css'
+import './Users.css'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
@@ -70,8 +70,7 @@ function Signup() {
                 success?
                 <p>You are signed up successfully.
                     <Link to="/signin" className="red-text">Signin</Link>
-                </p>
-                    
+                </p>               
             
                 :
                 <p className="sign-message">Already have an account? &nbsp;

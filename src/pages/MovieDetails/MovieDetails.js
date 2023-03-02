@@ -44,12 +44,12 @@ function MovieDetails() {
 
   const [reviewNumber, setReviewNumber] = React.useState(3);
   const [totalReviews, setTotalReviews] = React.useState(0);
-
   const [added, setAdded] = React.useState(false);
 
   //endpoint for videos
   //https://api.themoviedb.org/3/movie/653851/videos?api_key=c315ba96d8b132c0836df2e55986edc6
 
+  //for favorites
   React.useEffect(
     //check if this movie has been added
     ()=>{
@@ -71,7 +71,7 @@ function MovieDetails() {
 
   React.useEffect(
     ()=>{
-
+      //get movie info
       //console.log(`${baseUrl}movie/${params.movieId}?api_key=${apiKey}`)
       axios.get(`${baseUrl}movie/${movieId}?api_key=${apiKey}`)
       .then(res=>{
@@ -172,7 +172,11 @@ function MovieDetails() {
       }
       
       <div className="title-container">
-        <h2>{movie?.original_title}</h2>
+        <h2>{movie?.title}</h2>
+        {
+          
+        token  ?
+        <div>
         {
           added?
           <button onClick={removeFromFavorites} className="btn-remove">Remove from favorites</button>
@@ -180,6 +184,12 @@ function MovieDetails() {
           <button onClick={addToFavorites} className="btn-add">Add to the favorites</button>
 
         }
+        </div>
+        :
+        null
+        
+      }
+        
       
       </div>
       <Rating stars={rating} />

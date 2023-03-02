@@ -107,7 +107,7 @@ function Header2() {
                 <p>Welcome {user.username}</p>
                 {
                   profileOptions?
-                  <div className="fav-div">
+                  <div className="profile-options">
                     <Link to="/myfavorites">MyFavorites</Link>
                     <p className="logout" onClick={handleLogout}>Logout</p>
                   </div>
