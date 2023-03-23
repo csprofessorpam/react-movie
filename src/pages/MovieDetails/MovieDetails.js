@@ -44,6 +44,8 @@ function MovieDetails() {
 
   const [reviewNumber, setReviewNumber] = React.useState(3);
   const [totalReviews, setTotalReviews] = React.useState(0);
+
+  //for favorites
   const [added, setAdded] = React.useState(false);
 
   //endpoint for videos

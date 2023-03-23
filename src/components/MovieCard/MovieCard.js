@@ -37,17 +37,17 @@ function MovieCard({movie, imageUrl, imgHeight, cardStyle, radius}) {
       // <div className={cardStyle}>
       <Link to={movie._id?`/moviedetails/${movie?.tmdb_id}`:`/moviedetails/${movie?.id}`} 
              className={cardStyle}>
-      <div style={imageStyle}>
-          {/* MovieCard */}
-          <div className="movie-info-top">
-              {/* <p>{movie.vote_average}</p> */}
-              <Rating stars={movie.vote_average/2} />
-          </div>
-          <div className="movie-info-bottom">
-              <p>{movie.title}</p>
-              <p>Rating: {movie.vote_average/2}</p>
-          </div>
-      </div>
+        <div style={imageStyle}>
+            {/* MovieCard */}
+            <div className="movie-info-top">
+                {/* <p>{movie.vote_average}</p> */}
+                <Rating stars={movie.vote_average/2} />
+            </div>
+            <div className="movie-info-bottom">
+                <p>{movie.title}</p>
+                <p>Rating: {movie.vote_average/2}</p>
+            </div>
+        </div>
       {
       cardStyle==="top-rated-card"?
       <p>{movie.title}</p>:
