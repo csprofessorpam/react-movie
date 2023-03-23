@@ -42,7 +42,7 @@ function Slider() {
     //use axios to get data when component loads
     React.useEffect(   
         ()=>{
-            console.log('one ', index);
+            //console.log('one ', index);
             axios.get(`${baseUrl}movie/upcoming?api_key=${apiKey}`)
             .then(response => {
                 //console.log(response.data.results)
@@ -65,14 +65,14 @@ function Slider() {
     //create a second useEffect just to handle updating the rating
     React.useEffect(
         ()=>{
-            console.log("two ", index);
+            //console.log("two ", index);
             if (index > 0){
             //console.log("index is ", index)
             //console.log("rating before ", currentRating)
             //const nextRating = (upcomingMovies[index+1].vote_average)/2;
             //setCurrentRating(nextRating);
             setCurrentRating((upcomingMovies[index]?.vote_average)/2);
-             console.log("next rating ", currentRating)
+            // console.log("next rating ", currentRating)
             }
         }, [index]
     )
