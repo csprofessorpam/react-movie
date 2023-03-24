@@ -110,7 +110,7 @@ function MovieDetails() {
       })
       .catch(err=>console.log(err))
 
-    }, []
+    }, [movieId]
   )
 
   
